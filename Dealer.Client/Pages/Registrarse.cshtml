@@ -1,0 +1,65 @@
+﻿@page
+@model Dealer.Client.Pages.RegistrarseModel
+ 
+
+@{
+    ViewData["Title"] = "Registrarse";
+
+    DateTime nacimiento = new DateTime();
+    // async Task<IActionResult> post()
+    // {
+    //     HttpClient HttpClient = new();
+    //     // HttpResponseMessage Http = new();
+    //     if (string.IsNullOrEmpty(Model.cliente.Nombre)) { Model.Alert("Favor completar Campos"); }
+    //     var th = JsonConvert.SerializeObject(Model.cliente);
+    //     await HttpClient.PostAsJsonAsync(Model.UriClientes,th);
+    //     // Http = await HttpClient.PostAsJsonAsync(Model.UriClientes, th);
+    //     // string response = await Http.Content.ReadAsStringAsync();
+    //    await Model.Alert("Listo"); return RedirectToPage();
+    // }
+}
+
+
+<div style="align-items: center; justify-content: center; display: flex;">
+<form method="post" >
+
+    <div>
+    <label for="Nombre" class="form-label"> Nombre</label>
+    <input placeholder="Nombre" align="center" class="form-control" size="large" asp-for="cliente.Nombre" />
+    </div>
+    <div>
+    <label for="Nombre" class="form-label">Apellido</label>
+    <input placeholder="Apellido" align="center" class="form-control" size="large" asp-for="cliente.Apellido"/>
+    </div>
+        <div>
+    <label for="Nombre" class="form-label" >Telefono</label>
+            <input placeholder="Numero de Telefono" align="center" class="form-control" size="large" asp-for="cliente.Telefono" />
+        </div>
+    <div>
+    <label for="Nombre" class="form-label">Correo</label>
+            <input placeholder="email" class="form-control" align="center" size="large" asp-for="cliente.Correo" />
+    </div>
+    <div>
+        <label for="Clave" class="form-label">Clave</label>
+        <input placeholder="Clave" type="password" class="form-control" align="center" size="large" asp-for="cliente.Clave" />
+    </div>
+    <div>
+        <label for="Clave" class="form-label">Confirme la clave</label>
+        <input placeholder="Clave" type="password" class="form-control" align="center" asp-for="Cfclave" size="large" />
+    </div>
+    <div>
+    <label for="Nombre" class="form-label">Edad</label >
+            <input placeholder="Edad" class="form-control" align="center" size="large" asp-for="cliente.edad" />
+    </div>
+    <div style="align-content:center; align-items: center; text-align:center">
+            <input type="submit" style="margin: 10px; align-items:center; width:95px; height:60px; " class="btn-info" value="Subir" align="center" />
+    </div>
+</form>
+</div>
+
+
+
+
+
+
+

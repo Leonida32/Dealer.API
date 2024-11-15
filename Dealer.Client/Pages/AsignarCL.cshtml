@@ -1,0 +1,29 @@
+﻿@page "{_vehiculos}/ {IDV}"
+@model Dealer.Client.Pages.AsignarCLModel
+@{
+
+    var NomC = (string nombre, string apellido) => nombre + " " + apellido;
+    var Vehiculoasignado = (int id) => Model.vehiculos.FirstOrDefault(a => a.ID == id);
+    string? asignado(int id) => Vehiculoasignado(id).Marca + " " + Vehiculoasignado(id).Modelo;
+}
+<title>Asignar clientes </title>
+<h1 class="text-center"> Cliente contrato</h1>
+<table class="table-primary">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Nombre</td>
+            <td>Edad</td>
+            <td>Vehiculo Asignado</td>
+        </tr>
+    </thead>
+    @foreach(var i in Model.clientes)
+    {
+        <tr>
+            <td>@i.iD</td>
+            <td>@NomC(i.Nombre,i.Apellido)</td>
+            <td>@i.edad</td>
+            <td></td>
+        </tr>
+    }
+</table>

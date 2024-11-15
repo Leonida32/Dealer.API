@@ -1,0 +1,41 @@
+﻿@page
+@model Dealer.Client.Pages.VerVehiculosModel
+@{
+    Clientes? get(int? id) { if (Model.clientes is null) return new Clientes(); return Model.clientes.FirstOrDefault(x => x.iD == id); }
+  
+}
+
+@if (Model.clientes is null && Model.vehiculos is null)
+{ <em>Cargando datos</em> @Model.OnGet()}
+
+@if (Model.vehiculos.Count < 1) {<h1 class="text-center">No hay datos que mostrar</h1> <br /> <a class="btn-success" asp-page="/Agregarvehiculos">Agregar vehiculos</a>}
+else{
+<table class="table-bordered" width="75%" height="75%">
+         <thead>
+        <tr>
+        <th>ID</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Año</th>
+        <th>Asignado a</th>
+        <th><div class="btn-info"><a asp-page="/Iniciarsesion">Asignar vehiculo</a></div></th>
+        </tr>
+        </thead>
+@foreach (var i in Model.vehiculos)
+{
+  <tr>
+            <td>@i.ID</td>
+            <td>@i.Marca</td>
+            <td>@i.Modelo</td>
+            <td>@i.Ano.Year</td>
+            @if(i.IDTH != null){ if(get(i.IDTH) != null){   <td>@get(i.ID)</td>} }
+            else {<td>Nadie</td> <td><a class="link-warning" asp-page="/AsignarCL" asp-route-_vehiculos="@Model.vehiculos" asp-route-IDV="@i.ID">Asignar cliente</a>            </td>
+            } 
+            
+
+            
+            
+  </tr>
+}
+    </table>
+}

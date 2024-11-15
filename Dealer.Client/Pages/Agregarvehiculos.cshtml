@@ -1,0 +1,32 @@
+﻿@page
+@model Dealer.Client.Pages.AgregarvehiculosModel
+@{
+}
+<h1 class="text-center">Agregar Vehiculos</h1>
+<div style="text-align: center; align-content: center; align-items: center; align-self:center;">
+<form method="post">
+    <div style="text-align: center; align-content: center; align-items: center; align-self:center;">
+        <label class="form-label">Marca</label>
+            <input name="vehiculos.Marca" asp-for="vehiculos.Marca" size="large" class="form-control" />
+            <span asp-validation-for="vehiculos.Marca"></span>
+    </div>
+    <div style="text-align: center; align-content: center; align-items: center; align-self:center;">
+        <label class="form-label">Modelo</label>
+            <input name="vehiculos.Modelo" asp-for="vehiculos.Modelo" size="large" class="form-control" />
+            <span asp-validation-for="vehiculos.Modelo"></span>
+    </div>
+    <div style="text-align: center; align-content: center; align-items: center; align-self:center;">
+        <label class="form-label">Ano</label>
+            <input name="ano" asp-for="ano" size="large" class="form-control" />
+            <span asp-validation-for="ano"></span>
+    </div>
+    <div style="text-align: center; align-content: center; align-items: center; align-self:center;">
+        <label class="form-label">Asignado a</label>
+        <input name="vehiculos.Asignado" asp-for="vehiculos.Asignado" size="large" class="form-control" />
+        <span asp-validation-for="vehiculos.Asignado"></span>
+    </div>
+    <div style="margin: 10px; text-align: center; align-content: center; align-items: center; align-self:center;">
+        <input type="submit" value="Subir vehiculo" class="btn-primary" height="30" width="60" />
+    </div> 
+</form>
+</div>
