@@ -1,0 +1,101 @@
+﻿@inject HttpClient http
+@inject NavigationManager Na
+ 
+
+@code {
+
+
+ 
+    const string uriv = "https://localhost:7124/api/DealerVehiculos";
+    Vehiculos[] vehiculos { get; set; }
+  
+    protected override async Task OnInitializedAsync()
+    {
+        var carro =   await http.GetFromJsonAsync<Vehiculos[]>(uriv);
+        vehiculos = carro;
+     
+    }
+    void alquila(Vehiculos vehiculos)
+    {
+        string carro = JsonConvert.SerializeObject(vehiculos);
+        var cari = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(carro));
+        var uri = Uri.EscapeDataString(cari);
+        Na.NavigateTo($"/Alquilar/{uri}");
+    }
+        
+  //  Clientes? Getcl(int id)=> clientes.FirstOrDefault(c => c.iD == id);
+}
+
+<div style="margin-top: 40px; margin-bottom:50px">
+    <h1 class="anton text-center h-100">Dealer franchelis</h1>
+</div>
+
+
+@if (vehiculos != null && vehiculos.Length > 0)
+{
+    <div class="container text-center" style="margin-top:40px">
+        <div class="row">
+            @foreach (var s in vehiculos)
+            {
+                if (s.IDTH > 0 && !string.IsNullOrEmpty(s.Asignado) )
+        {
+                    <div class="col-md-4">
+                        <div class="card" style="width: 18rem;">
+                            <img src="@s.Imagen" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">@s.Marca</h5>
+                                <p class="card-text">@s.Modelo</p>
+                                <h3>Alquilado</h3>
+                                @* modal *@
+                                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    Mas informacion
+                                    </button>
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="examplemodallabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content anton">
+
+                                            <div class="modal-header"> 
+                                                <h1 class="modal-tittle">Mas informacion</h1>
+                                                <button type="button" data-bs-dismiss="modal" class="btn-close" aria-label="Close"></button>
+                                            </div>
+                                                        <div class="modal-body " style="text-align:justify;">
+                                                                    <label>Asignado a: @s.Asignado</label> <br />
+                                                                    <label>Desde: @s.Desde.ToString()</label><br />
+                                                                    <label>Hasta: @s.Hasta.ToString()</label><br />
+                                                                    <label>Ano del vehiculo: @s.Ano</label><br />
+                                                        </div>
+                                                            <div class="modal-footer">
+                                                            <button class="btn btn-dark" data-bs-dismiss="modal"> De acuerdo</button>
+                                                            </div>
+                                                        </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                 </div>
+                }
+                else
+                {
+                    
+                <div class="col-md-4">
+                                <div class="card" style="width: 18rem;">
+                                         <img src="@s.Imagen" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                        <h5 class="card-title">@s.Marca</h5>
+                                        <p class="card-text">@s.Modelo</p>
+                                        <button @onclick="(() =>alquila(s))" class="btn btn-primary">Alquilar</button>
+                                        </div>
+                                </div>
+                            </div>
+                }
+    }
+        </div>
+    </div>
+}else
+{
+    <em>
+  <h1 class="h100 text-center">      Lamentamos informale de que actualmente no quedan vehiculos   </h1>
+    </em>
+
+
+}

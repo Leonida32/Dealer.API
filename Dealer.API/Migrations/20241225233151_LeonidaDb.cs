@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Models_Services.Migrations
+namespace Dealer.API.Migrations
 {
     /// <inheritdoc />
-    public partial class DealerDB : Migration
+    public partial class LeonidaDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,8 +22,7 @@ namespace Models_Services.Migrations
                     Carroallevar = table.Column<int>(type: "INTEGER", nullable: true),
                     edad = table.Column<int>(type: "INTEGER", nullable: false),
                     Correo = table.Column<string>(type: "TEXT", nullable: false),
-                    Telefono = table.Column<string>(type: "TEXT", nullable: false),
-                    Clave = table.Column<string>(type: "TEXT", nullable: false)
+                    Telefono = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -40,7 +39,10 @@ namespace Models_Services.Migrations
                     Asignado = table.Column<string>(type: "TEXT", nullable: true),
                     Marca = table.Column<string>(type: "TEXT", nullable: false),
                     Modelo = table.Column<string>(type: "TEXT", nullable: false),
-                    Ano = table.Column<DateOnly>(type: "TEXT", nullable: false)
+                    Ano = table.Column<DateOnly>(type: "TEXT", nullable: false),
+                    Desde = table.Column<DateOnly>(type: "TEXT", nullable: false),
+                    Hasta = table.Column<DateOnly>(type: "TEXT", nullable: false),
+                    Imagen = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {

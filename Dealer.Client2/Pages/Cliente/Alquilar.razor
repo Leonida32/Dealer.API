@@ -1,0 +1,137 @@
+﻿@page "/Alquilar/{IDV}"
+@inject NavigationManager Nav
+@inject HttpClient Http
+
+
+
+@code {
+
+    [Parameter]
+    public string IDV { get; set;}
+
+    protected override void OnParametersSet()
+    {
+        var json = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(IDV));
+        var carro = JsonConvert.DeserializeObject<Vehiculos>(json);
+        vehiculo = (carro != null) ? carro : new();
+
+    }
+
+    [SupplyParameterFromForm]
+    Clientes clientes  { get; set; } = new ();
+
+    [SupplyParameterFromForm]
+    DateOnly Desde { get; set;} = new();
+    [SupplyParameterFromForm]
+    DateOnly Hasta { get; set; } = new();
+
+    Vehiculos vehiculo { get; set; }
+
+    const string uriv = "https://localhost:7124/api/DealerVehiculos";
+    const string uric = "https://localhost:7124/api/Clientes/Cliente/";
+    async Task Subida()
+    { //actualizar carro 
+
+        try
+        {
+
+            if (this.clientes == new Clientes()) {  Nav.Refresh(); return; }
+            if(this.Desde > this.Hasta)
+            {
+                Mensaje = "No puedes colocar fecha 'Desde' despues de la fecha de entrega (Hasta) del vehiculo ";
+                Nav.Refresh(true); return;
+            }
+            if(this.Desde < DateOnly.FromDateTime(DateTime.Now))
+            {
+                Mensaje = "La fecha 'Desde' ya paso, no se puede colocar una fecha pasada. ";
+                Nav.Refresh(true); return;
+            }
+
+            vehiculo.Asignado = this.clientes.Nombre + " " + this.clientes.Apellido;
+            vehiculo.Desde = this.Desde; vehiculo.Hasta = this.Hasta;
+            this.clientes.Carroallevar = vehiculo.ID;
+
+            //ahora json
+            // var th = await Http.PostAsJsonAsync<Clientes>(uric, this.clientes);
+            // var cliente=   await th.Content.ReadFromJsonAsync<Clientes>();
+            // this.vehiculo.IDTH = cliente.iD;
+            // var editarv = await Http.PutAsJsonAsync<Vehiculos>(uriv + $"/{vehiculo.ID}", vehiculo);
+
+            var alquilar = await Http.PostAsJsonAsync<ClientesyVehiculos>(uriv + "/Alquilar", new ClientesyVehiculos() { clientes = clientes, vehiculos = vehiculo });
+            if (alquilar.IsSuccessStatusCode)
+            {
+                Console.WriteLine("Listo");
+                Nav.NavigateTo("/", true);
+            } else Console.WriteLine(alquilar.StatusCode + " " + alquilar.Content);
+
+            
+       
+            //porque al parecer clientes llega null a la api ?
+
+          
+
+
+        }catch(Exception e)
+        {
+            Console.WriteLine(e); 
+        }
+
+    }
+
+    string Mensaje = "";
+
+}
+
+<script src="../wwwroot/javascript.ts"></script>
+ @if (!string.IsNullOrEmpty(Mensaje))
+{
+<div class="alert alert-danger" role="alert">
+   <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+   <div class="anton" style="font-size:10px;">@Mensaje</div>
+</div>
+}
+<div style="margin-top: 40px; margin-bottom:50px">
+    <h1 class="anton text-center h-100">Dealer franchelis</h1>
+</div>
+    <div class="anton">
+
+<EditForm OnSubmit="Subida" Model="clientes">
+    <DataAnnotationsValidator />
+    <ValidationSummary/>
+
+
+    <label for="clientes.Nombre" class="form-label">Nombre: </label>
+    <input name="clientes.Nombre" autocomplete="off" @bind-value="clientes.Nombre" class="form-control" required />
+
+    <label for="clientes.Apellido" class="form-label">Apellido: </label>
+    <input name="clientes.Apellido" autocomplete="off" @bind-value="clientes.Apellido" class="form-control" required />
+
+    <label for="clientes.Edad" class="form-label">Edad: </label>
+    <input name="clientes.Edad" autocomplete="off" @bind-value="clientes.edad" type="number" class="form-control" required />
+
+    <label for="clientes.Correo" class="form-label">Correo: </label>
+    <input name="clientes.Correo" autocomplete="off" @bind-value="clientes.Correo" class="form-control" required />
+
+    <label for="clientes.Telefono" class="form-label">Telefono: </label>
+    <input name="clientes.Telefono" autocomplete="off" @bind-value="clientes.Telefono" class="form-control" required />
+
+    <label for="Tiempo" style="text-align:center">Tiempo</label> 
+    <div class="container text-center">
+        <div class="row">
+            <div class="col">
+            <label for="Desde">Desde</label>
+                <input type="date" name="Desde" @bind-value="Desde" required />
+            </div>  
+            <div class="col">
+                <label for="Hasta">Hasta</label>
+                <input type="date" name="Hasta" @bind-value="Hasta" required />
+            </div>
+        </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-success" style=" position:center; text-align:center; align-items: center; align-self: center; align-content:center;">Submit</button>
+
+</EditForm>
+   
+</div>

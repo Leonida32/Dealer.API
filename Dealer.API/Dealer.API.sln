@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dealer.API", "Dealer.API.cs
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models&Services", "..\Models&Services\Models&Services.csproj", "{80A4AF29-197C-42A1-B3BB-5A7A803FCCAD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dealer.Client", "..\Dealer.Client\Dealer.Client.csproj", "{0EC21608-125B-4281-8FDE-D00E8C21E48B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dealer.Client2", "..\Dealer.Client2\Dealer.Client2.csproj", "{B2AE129B-BB03-4F44-B60B-3A28EE16D390}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F79994DD-8D61-4E3E-A560-4443EFABCF7D} = {F79994DD-8D61-4E3E-A560-4443EFABCF7D}
 	EndProjectSection
@@ -26,10 +26,10 @@ Global
 		{80A4AF29-197C-42A1-B3BB-5A7A803FCCAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80A4AF29-197C-42A1-B3BB-5A7A803FCCAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80A4AF29-197C-42A1-B3BB-5A7A803FCCAD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0EC21608-125B-4281-8FDE-D00E8C21E48B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0EC21608-125B-4281-8FDE-D00E8C21E48B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0EC21608-125B-4281-8FDE-D00E8C21E48B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0EC21608-125B-4281-8FDE-D00E8C21E48B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2AE129B-BB03-4F44-B60B-3A28EE16D390}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2AE129B-BB03-4F44-B60B-3A28EE16D390}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2AE129B-BB03-4F44-B60B-3A28EE16D390}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2AE129B-BB03-4F44-B60B-3A28EE16D390}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

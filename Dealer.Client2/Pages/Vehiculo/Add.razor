@@ -1,0 +1,36 @@
+﻿@page "/Add"
+@inject HttpClient http
+@inject NavigationManager Nav
+@code {
+    [SupplyParameterFromForm]
+    Vehiculos vehiculos { get; set; } = new();
+    [SupplyParameterFromForm]
+    int ano { get; set; }
+
+  
+    string uriv = "https://localhost:7124/api/DealerVehiculos";
+    public async Task AddV()
+    {
+
+        vehiculos.Ano = new(ano, 1, 1);
+        await http.PostAsJsonAsync<Vehiculos>(uriv, vehiculos);
+        Nav.NavigateTo("/", true);
+    }
+}
+<div style="margin-top: 40px; margin-bottom:50px">
+    <h1 class="anton text-center h-100">Dealer franchelis</h1>
+</div>
+<div class=" anton">
+
+<EditForm OnSubmit="AddV" Model="vehiculos">
+    <label for="Marca" class="form-label">Marca</label>
+    <input name="Marca" autocomplete="off" @bind-value="vehiculos.Marca" class="form-control"/>
+    <label for="Marca" class="form-label">Modelo</label>
+    <input name="Marca" autocomplete="off" @bind-value="vehiculos.Modelo" class="form-control" />
+    <label for="Marca" class="form-label">Ano</label>
+    <input name="Marca" autocomplete="off" @bind-value="ano" type="number" class="form-control" />
+    <label for="Marca" class="form-label">URL Imagen</label>
+    <input name="Marca" autocomplete="off" @bind-value="vehiculos.Imagen" class="form-control" />
+    <button type="submit" class="btn btn-success" style="margin-top: 30px; position:center; text-align:center; align-items: center; align-self: center; align-content:center;">Submit</button>
+</EditForm>
+</div>

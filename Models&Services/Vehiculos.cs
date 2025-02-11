@@ -25,6 +25,14 @@ namespace Models_Services
         public string Modelo { get; set; }
         [Column("Ano"), Display(Name = "Ano")]
         public DateOnly Ano { get; set; }
+
+         [Column("Desde"), Display(Name = "Desde")]
+        public DateOnly Desde {  get; set; }
+         [Column("Hasta"), Display(Name = "Hasta")]
+
+        public DateOnly Hasta { get; set; } 
         
+         [Column("Imagen"), Display(Name = "Imagen")]
+         public string Imagen {  get; set; }    
     }
 }

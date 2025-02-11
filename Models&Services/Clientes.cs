@@ -16,8 +16,10 @@ namespace Models_Services
         public string Nombre {  get; set; }
         [Column("Apellido"),Display(Name = "Apellido: ")]
         public string Apellido { get; set; }
+        
         [Column("Carroallevar"), Display(Name = "Carro a llevar: ")]
         public int?  Carroallevar { get; set; }
+
         [Column("edad"), Display(Name ="Edad: ")]
         public int edad { get; set; }
         [Column("Correo"), Display(Name = "Correo: ")]
@@ -25,7 +27,6 @@ namespace Models_Services
         [Column("Telefono"), Display(Name = "Telefono: ")]
         public string Telefono { get; set; }
 
-        [Column("Clave"), Display(Name = "Clave: ")]
-        public string Clave {  get; set; }
+
     }
 }

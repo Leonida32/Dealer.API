@@ -32,15 +32,15 @@ namespace Dealer.Client.Pages
             {
                 return Page();
             }
-           if(cliente.Clave == Cfclave){ 
+         
             HttpClient HttpClient = new();
             if (string.IsNullOrEmpty(cliente.Nombre)) { await Java.InvokeAsync<string>("alert","Favor completar Campos");  }
             //var th = JsonConvert.SerializeObject(cliente);
            await HttpClient.PostAsJsonAsync<Clientes>(UriClientes, cliente);
                 /* await Java.InvokeAsync<string>("alert", response);*/
                 return RedirectToPage("./VerVehiculos");
-            }
-           return Page();
+            
+           
         }
        
 
