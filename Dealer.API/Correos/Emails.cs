@@ -8,8 +8,8 @@ namespace Dealer.API.Correos
 {
     public class Emails
     {
-        private string Micorreo = "franchelisrd@gmail.com";
-        private string Clave = "sxxp oirx dhki ykqg";
+        private string Micorreo = "[COLOCAR CORREO]";
+        private string Clave = "[CLAVE DE APLICACION]";
         public string CorreoTH { get; set; }
         const string server = "smtp.gmail.com";
         const int puerto = 587;
